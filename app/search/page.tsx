@@ -6,9 +6,7 @@ export default async function Search(props: {
   const searchParams = await props.searchParams
   const query = searchParams.query as string
   const { albums, artists, tracks } = await getAAT({ query })
-
-  console.log(albums)
-
+  
   return (
     <div>
     </div>
