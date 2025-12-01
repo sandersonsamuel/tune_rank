@@ -56,7 +56,7 @@ export default function Home() {
           <p>Compartilhe suas avaliações em outras redes com o nosso template de review.</p>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
-            whileTap={{ height: "200px"}}
+            whileTap={{ height: "200px" }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ ease: "easeIn" }}
             className="bg-white/10 mt-2 h-32 backdrop-blur-md p-3 rounded-t-xl flex items-center gap-3 border border-white/10 transform group-hover:translate-y-[-5px] transition-transform">
@@ -78,7 +78,7 @@ export default function Home() {
                 style={{ perspective: 1000 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.1, delay: i * 0.1, ease: "easeInOut" }}
-                key={i} className="bg-white/10 backdrop-blur-md p-3 rounded-xl flex items-center gap-3 border border-white/10 transform group-hover:translate-y-[-5px] transition-transform" style={{ transitionDelay: `${i * 100}ms` }}>
+                key={i} className="bg-white/10 backdrop-blur-md p-3 rounded-xl flex items-center gap-3 border border-white/10 transform group-hover:translate-y-[-5px] transition-transform" >
                 <div className="w-10 h-10 rounded-full bg-white/20" />
                 <div className="flex-1 h-2 bg-white/20 rounded-full w-20" />
               </motion.div>
