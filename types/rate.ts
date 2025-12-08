@@ -25,6 +25,6 @@ export type DataChartRateReview = {
 
 export type RatesReview = {
   data: DataChartRateReview[],
-  avarege: number,
+  average: number,
   total: number
 }

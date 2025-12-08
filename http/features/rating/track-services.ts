@@ -105,7 +105,7 @@ export const getTrackRates = async (trackId: string): Promise<RatesReview> => {
 
   return {
     data: trackRateData,
-    avarege: data.length > 0 ? ratesSum / data.length : 0,
+    average: data.length > 0 ? ratesSum / data.length : 0,
     total: data.length
   }
 }

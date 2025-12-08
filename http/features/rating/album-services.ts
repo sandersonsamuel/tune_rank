@@ -105,7 +105,7 @@ export const getAlbumRates = async (albumId: string): Promise<RatesReview> => {
 
   return {
     data: albumRateData,
-    avarege: data.length > 0 ? ratesSum / data.length : 0,
+    average: data.length > 0 ? ratesSum / data.length : 0,
     total: data.length
   }
 }

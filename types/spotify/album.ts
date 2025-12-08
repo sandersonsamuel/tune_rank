@@ -21,7 +21,40 @@ export interface SpotifyAlbum {
   release_date_precision: string;
   type: string;
   uri: string;
+  tracks: AlbumTracks;
   artists: SpotifyArtist[];
+}
+
+export interface AlbumTracks {
+  href: string
+  limit: number
+  next: any
+  offset: number
+  previous: any
+  total: number
+  items: SpotifyTrackItemInAlbum[]
+}
+
+export interface SpotifyTrackItemInAlbum {
+  artists: SpotifyArtist[]
+  available_markets: string[]
+  disc_number: number
+  duration_ms: number
+  explicit: boolean
+  external_urls: SpotifyExternalUrls
+  href: string
+  id: string
+  name: string
+  preview_url: any
+  track_number: number
+  type: string
+  uri: string
+  is_local: boolean
+}
+
+export interface SpotifyTracks {
+  href: string;
+  total: number;
 }
 
 export interface SpotifyArtist {

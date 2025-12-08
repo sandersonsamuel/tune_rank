@@ -1,11 +1,12 @@
 "use client"
 
+import { SpotifyTrackItemInAlbum } from "@/types/spotify/album"
 import { SpotifyTrackItem } from "@/types/spotify/track"
 import { motion } from "motion/react"
 import { useRouter } from "next/navigation"
 
 type Props = {
-  track: SpotifyTrackItem
+  track: SpotifyTrackItem | SpotifyTrackItemInAlbum
 }
 
 export const SearchTrackItem = ({ track }: Props) => {
@@ -13,9 +14,11 @@ export const SearchTrackItem = ({ track }: Props) => {
   const router = useRouter()
 
   return (
-    <motion.div whileTap={{ scale: 0.97, backgroundColor: "var(--card)" }} onClick={() => router.push(`/track/${track.id}`)} className="flex w-full items-center justify-between hover:bg-card rounded-lg p-2 cursor-pointer pr-4">
+    <motion.div whileTap={{ scale: 0.97, backgroundColor: "var(--card)" }} onClick={() => router.push(`/track/${track.id}`)} className="flex w-full min-h-[80px] items-center justify-between hover:bg-card rounded-lg p-2 cursor-pointer px-4">
       <div className="flex gap-3">
-        <img className="size-16 rounded-xl object-cover" src={track?.album?.images[2].url} alt={`${track?.name} cover`} />
+        {
+          "album" in track && <img className="size-16 rounded-xl object-cover" src={track?.album?.images[2].url} alt={`${track?.name} cover`} />
+        }
         <div className="flex flex-col justify-center">
           <p className="line-clamp-2 text- lg:text-lg font-bold">{track?.name}</p>
           <span className="text-xs font-bold">
