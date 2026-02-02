@@ -19,6 +19,4 @@ export default async function TrackPage({ params }: Props) {
   return (
     <TrackPageContainer track={track} id={id} />
   )
-
-  
 }

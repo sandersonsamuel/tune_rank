@@ -86,7 +86,7 @@ export const TrackRatingCard = ({ trackId, onSaveAvaliation, isSaving }: Props) 
         <StarRatingInput rate={rate} setRate={setRate} />
         
         {
-          !isSaving && !comment && (
+          isSaving && !comment ? null : (
             <Textarea placeholder="Escreva sua avaliação aqui" className="mt-4 text-xs" value={comment} onChange={(e) => setComment(e.target.value)} />
           )
         }
