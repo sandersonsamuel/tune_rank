@@ -1,7 +1,7 @@
 import { AuthProvider } from "@/components/providers/auth-provider";
 
 
-export default async function MyLayout({
+export default function MyLayout({
   children,
 }: {
   children: React.ReactNode;
