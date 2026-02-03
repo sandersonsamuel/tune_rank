@@ -1,5 +1,5 @@
 import { db } from "@/firebase/config"
-import { DataChartRateReview, RatesReview, RateTrack } from "@/types/rate"
+import { DataChartRateReview, RatesReview, RateRelease } from "@/types/rate"
 import { User } from "firebase/auth"
 import { collection, doc, documentId, getDoc, getDocs, query, serverTimestamp, setDoc, where } from "firebase/firestore"
 import toast from "react-hot-toast"
@@ -9,8 +9,9 @@ export const postRatingTrack = async (rate: number, comment: string, trackId: st
     const newRating = {
       id: `${trackId}_${user.uid}`,
       userId: user.uid,
-      trackId: trackId,
+      releaseId: trackId,
       rating: rate,
+      type: "track",
       review: comment,
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp()
@@ -26,24 +27,25 @@ export const postRatingTrack = async (rate: number, comment: string, trackId: st
   }
 }
 
-export const getRatingTrack = async (document_id?: string): Promise<RateTrack | null> => {
+export const getRatingTrack = async (document_id?: string): Promise<RateRelease | null> => {
   try {
     if (document_id) {
       const docRef = doc(db, "ratings", document_id)
       const docSnap = await getDoc(docRef)
 
       if (docSnap.exists()) {
-        return docSnap.data() as RateTrack
+        return docSnap.data() as RateRelease
       } else {
         return null
       }
     } else {
       return {
         userId: "",
-        trackId: "",
+        releaseId: "",
         rating: 0,
+        type: "track",
         review: ""
-      } as RateTrack
+      } as RateRelease
     }
   } catch (error) {
     console.log(error)
@@ -59,7 +61,7 @@ export const getTrackRates = async (trackId: string): Promise<RatesReview> => {
   );
 
   const querySnapshot = await getDocs(q);
-  const data = querySnapshot.docs.map(doc => doc.data() as RateTrack)
+  const data = querySnapshot.docs.map(doc => doc.data() as RateRelease)
   const trackRateData = [{
     rating: 0.5,
     count: 0

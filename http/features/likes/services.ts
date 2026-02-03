@@ -1,6 +1,6 @@
 import { db } from "@/firebase/config"
 import { LikeAlbum } from "@/types/album"
-import { LikeTrack } from "@/types/track"
+import { Like } from "@/types/track"
 import { deleteDoc, doc, getDoc, setDoc, Timestamp } from "firebase/firestore"
 
 // Track Services
@@ -11,9 +11,10 @@ type TrackProps = {
 
 export const likeTrack = async ({ trackId, userId }: TrackProps) => {
   try {
-    const payload: LikeTrack = {
+    const payload: Like = {
       userId,
-      trackId,
+      releaseId: trackId,
+      type: "track",
       createdAt: Timestamp.now()
     }
     await setDoc(doc(db, "likes", trackId + "_" + userId), payload)
@@ -45,9 +46,10 @@ type AlbumProps = {
 
 export const likeAlbum = async ({ albumId, userId }: AlbumProps) => {
   try {
-    const payload: LikeAlbum = {
+    const payload: Like = {
       userId,
-      albumId,
+      releaseId: albumId,
+      type: "album",
       createdAt: Timestamp.now()
     }
     await setDoc(doc(db, "likes", albumId + "_" + userId), payload)

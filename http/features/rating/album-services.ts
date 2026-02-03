@@ -1,5 +1,5 @@
 import { db } from "@/firebase/config"
-import { DataChartRateReview, RateAlbum, RatesReview } from "@/types/rate"
+import { DataChartRateReview, RateRelease, RatesReview } from "@/types/rate"
 import { User } from "firebase/auth"
 import { collection, doc, documentId, getDoc, getDocs, query, serverTimestamp, setDoc, where } from "firebase/firestore"
 import toast from "react-hot-toast"
@@ -9,8 +9,9 @@ export const postRatingAlbum = async (rate: number, comment: string, albumId: st
     const newRating = {
       id: `${albumId}_${user.uid}`,
       userId: user.uid,
-      albumId: albumId,
+      releaseId: albumId,
       rating: rate,
+      type: "album",
       review: comment,
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp()
@@ -26,24 +27,24 @@ export const postRatingAlbum = async (rate: number, comment: string, albumId: st
   }
 }
 
-export const getRatingAlbum = async (document_id?: string): Promise<RateAlbum | null> => {
+export const getRatingAlbum = async (document_id?: string): Promise<RateRelease | null> => {
   try {
     if (document_id) {
       const docRef = doc(db, "ratings", document_id)
       const docSnap = await getDoc(docRef)
 
       if (docSnap.exists()) {
-        return docSnap.data() as RateAlbum
+        return docSnap.data() as RateRelease
       } else {
         return null
       }
     } else {
       return {
         userId: "",
-        albumId: "",
+        releaseId: "",
         rating: 0,
         review: ""
-      } as RateAlbum
+      } as RateRelease
     }
   } catch (error) {
     console.log(error)
@@ -59,7 +60,7 @@ export const getAlbumRates = async (albumId: string): Promise<RatesReview> => {
   );
 
   const querySnapshot = await getDocs(q);
-  const data = querySnapshot.docs.map(doc => doc.data() as RateAlbum)
+  const data = querySnapshot.docs.map(doc => doc.data() as RateRelease)
   const albumRateData = [{
     rating: 0.5,
     count: 0

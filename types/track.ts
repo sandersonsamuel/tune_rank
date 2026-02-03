@@ -1,7 +1,8 @@
 import { Timestamp } from "firebase/firestore"
 
-export type LikeTrack = {
+export type Like = {
   userId: string
-  trackId: string
+  releaseId: string
+  type: "track" | "album"
   createdAt: Timestamp
 }

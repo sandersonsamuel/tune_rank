@@ -1,18 +1,10 @@
 import { Timestamp } from "firebase/firestore"
 
-export type RateTrack = {
+export type RateRelease = {
   userId: string,
-  trackId: string,
+  releaseId: string,
   rating: number,
-  review?: string,
-  createdAt: Timestamp,
-  updatedAt: Timestamp
-}
-
-export type RateAlbum = {
-  userId: string,
-  albumId: string,
-  rating: number,
+  type: "album" | "track",
   review?: string,
   createdAt: Timestamp,
   updatedAt: Timestamp
