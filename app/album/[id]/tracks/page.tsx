@@ -10,7 +10,7 @@ export default async function TracksPage({ params }: Props) {
   const { id } = await params
   const album = await getAlbum(id)
 
-  if (Array.isArray(album)) {
+  if (Array.isArray(album) || "albums" in album) {
     return <div>Album not found</div>
   }
 

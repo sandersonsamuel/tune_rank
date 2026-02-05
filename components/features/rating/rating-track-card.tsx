@@ -6,7 +6,7 @@ import { Card, CardAction, CardContent, CardHeader, CardTitle } from "@/componen
 import { Textarea } from "@/components/ui/textarea"
 import { useGetRatingTrack } from "@/http/features/rating/hooks"
 import { postRatingTrack } from "@/http/features/rating/track-services"
-import { RateTrack } from "@/types/rate"
+import { RateRelease } from "@/types/rate"
 import { userState } from "@/valtio"
 import { useQueryClient } from "@tanstack/react-query"
 import { User } from "firebase/auth"
@@ -52,11 +52,12 @@ export const TrackRatingCard = ({ trackId, onSaveAvaliation, isSaving }: Props) 
     if (data) {
       const user = data as User
       postRatingTrack(rate, comment, trackId, user).then(() => {
-        const newRating: RateTrack = {
+        const newRating: RateRelease = {
           userId: user.uid,
-          trackId: trackId,
+          releaseId: trackId,
           rating: rate,
           review: comment,
+          type: "track",
           createdAt: Timestamp.now(),
           updatedAt: Timestamp.now()
         }

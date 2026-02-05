@@ -6,7 +6,7 @@ import { Card, CardAction, CardContent, CardHeader, CardTitle } from "@/componen
 import { Textarea } from "@/components/ui/textarea"
 import { postRatingAlbum } from "@/http/features/rating/album-services"
 import { useGetRatingAlbum } from "@/http/features/rating/hooks"
-import { RateAlbum } from "@/types/rate"
+import { RateRelease } from "@/types/rate"
 import { userState } from "@/valtio"
 import { useQueryClient } from "@tanstack/react-query"
 import { User } from "firebase/auth"
@@ -52,11 +52,12 @@ export const AlbumRatingCard = ({ albumId, onSaveAvaliation, isSaving }: Props) 
     if (data) {
       const user = data as User
       postRatingAlbum(rate, comment, albumId, user).then(() => {
-        const newRating: RateAlbum = {
+        const newRating: RateRelease = {
           userId: user.uid,
-          albumId: albumId,
+          releaseId: albumId,
           rating: rate,
           review: comment,
+          type: "album",
           createdAt: Timestamp.now(),
           updatedAt: Timestamp.now()
         }

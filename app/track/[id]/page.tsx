@@ -11,7 +11,7 @@ export default async function TrackPage({ params }: Props) {
   const { id } = await params
   const track = await getTrack(id)
 
-  if (!track || Array.isArray(track)) {
+  if (!track || Array.isArray(track) || "tracks" in track) {
     return <div>Track not found</div>
   }
 
