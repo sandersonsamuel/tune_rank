@@ -10,6 +10,10 @@ export default async function TracksPage({ params }: Props) {
   const { id } = await params
   const album = await getAlbum(id)
 
+  if (Array.isArray(album)) {
+    return <div>Album not found</div>
+  }
+
   return (
     <div className="px-3 mt-7">
       <FeaturedAlbum featuredResult={album} />

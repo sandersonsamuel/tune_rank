@@ -1,11 +1,11 @@
 import { SpotifyAlbum } from "@/types/spotify/album"
 import { getSpotifyToken } from "."
 
-export const getAlbum = async (id: string): Promise<SpotifyAlbum> => {
+export const getAlbum = async (id: string | string[]): Promise<SpotifyAlbum | {albums: SpotifyAlbum[]}> => {
   const token = await getSpotifyToken()
 
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_SPOTIFY_BASE_URL}albums/${id}?locale=pt-BR`,
+    `${process.env.NEXT_PUBLIC_SPOTIFY_BASE_URL}albums${Array.isArray(id) && id.length > 1 ? "?ids=" + id.join(",") : "/" + id}?locale=pt-BR`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
