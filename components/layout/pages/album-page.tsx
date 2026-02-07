@@ -65,7 +65,7 @@ export const AlbumPageContainer = ({ album }: Props) => {
                                 <ListMusic className="size-5" />
                             </Button>
                         </Link>
-                        <ShareButton url={`${process.env.NEXT_PUBLIC_BASE_URL}/album/${album.id}`} title={album.name} type="album" artist={album.artists[0].name} />
+                        <ShareButton url={`/album/${album.id}`} title={album.name} type="album" artist={album.artists[0].name} />
                     </div>
                 )
             }

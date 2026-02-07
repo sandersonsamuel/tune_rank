@@ -69,7 +69,7 @@ export const TrackPageContainer = ({ track, id }: Props) => {
                 !isSaving && (
                     <div className="flex gap-2">
                         <TrackLikeButton trackId={id} />
-                        <ShareButton url={`${process.env.NEXT_PUBLIC_BASE_URL}/track/${id}`} title={track.name} type={track.type} artist={firstArtist.name} />
+                        <ShareButton url={`/track/${id}`} title={track.name} type={track.type} artist={firstArtist.name} />
                     </div>
                 )
             }

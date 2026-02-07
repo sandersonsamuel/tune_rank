@@ -76,7 +76,7 @@ export const AlbumRatingCard = ({ albumId, onSaveAvaliation, isSaving }: Props) 
   return (
     <Card className="w-full rounded-3xl p-4 max-w-[500px] gap-0 relative">
       <CardHeader className="flex">
-        <CardTitle className="text-center text-slate-500 w-full mb-3">{isSaving ? "Minha avaliação" : "Avalie esse álbum"}</CardTitle>
+        <CardTitle className="text-center text-slate-300 w-full mb-3">{isSaving ? "Minha avaliação" : "Avalie esse álbum"}</CardTitle>
         <CardAction className="absolute right-4 top-2">
           {
             isUpdateMode && !isSaving && (

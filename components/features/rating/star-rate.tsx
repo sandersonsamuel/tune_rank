@@ -7,7 +7,7 @@ type Props = {
   rate: number
 }
 
-const PRIMARY_COLOR = "#3c83f6"
+const PRIMARY_COLOR = "#0258e3"
 const INACTIVE_COLOR = "#475569"
 
 export const StarItem = ({ index, rateHandler, rateHover, rate }: Props) => {
@@ -44,7 +44,7 @@ export const StarItem = ({ index, rateHandler, rateHover, rate }: Props) => {
         </g>
       </svg>
       <svg
-        onMouseEnter={() => rateHandler(index + 0.5, "hover")}
+        onMouseEnter={() => rateHandler(index, "hover")}
         onMouseLeave={() => rateHandler(0, "hover")}
         onClick={() => rateHandler(index, "click")}
         className="scale-x-[-1]"

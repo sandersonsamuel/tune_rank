@@ -13,7 +13,7 @@ export const LikeButton = ({ handleClick, isLoading, like }: Props) => {
 
   return (
     <motion.span whileTap={{ scale: 0.7 }} onClick={handleClick}>
-      <Button variant="outline" size={"icon-lg"} disabled={isLoading}>
+      <Button variant="outline" size={"icon-lg"} disabled={isLoading} className={cn("cursor-pointer", like && "border-primary")}>
         <Heart className={cn("size-5", like && "fill-primary text-primary", isLoading && "animate-pulse")} />
       </Button>
     </motion.span>
