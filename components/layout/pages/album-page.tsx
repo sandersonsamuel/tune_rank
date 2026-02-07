@@ -1,6 +1,6 @@
 "use client"
 
-import { AlbumLikeButton } from "@/components/features/likes/like-album"
+import { AlbumLikeButton } from "@/components/features/likes/album-like-button"
 import { AlbumRatingCard } from "@/components/features/rating/rating-album-card"
 import { AlbumReviewsList } from "@/components/features/rating/album-reviews"
 import { Button } from "@/components/ui/button"

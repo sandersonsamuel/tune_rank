@@ -1,6 +1,6 @@
 "use client"
 
-import { TrackLikeButton } from "@/components/features/likes/like-track"
+import { TrackLikeButton } from "@/components/features/likes/track-like-button"
 import { TrackRatingCard } from "@/components/features/rating/rating-track-card"
 import { TrackReviewsList } from "@/components/features/rating/track-reviews"
 import { ShareButton } from "@/components/shared/share-button"

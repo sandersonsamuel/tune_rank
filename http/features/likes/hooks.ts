@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { getLikeAlbum, getLikeTrack } from "./services"
+import { getLikeAlbum, getLikeTrack, getLikedTracks, getLikedAlbums } from "./services"
 
 type TrackProps = {
   userId?: string
@@ -10,6 +10,14 @@ export const useGetLikeTrack = ({ userId, trackId }: TrackProps) => {
   return useQuery({
     queryKey: ["like-track", userId, trackId],
     queryFn: () => getLikeTrack(userId!, trackId),
+    enabled: !!userId
+  })
+}
+
+export const useGetLikedTracks = ({ userId }: { userId?: string }) => {
+  return useQuery({
+    queryKey: ["like-tracks", userId],
+    queryFn: () => getLikedTracks(userId!),
     enabled: !!userId
   })
 }
@@ -26,3 +34,12 @@ export const useGetLikeAlbum = ({ userId, albumId }: AlbumProps) => {
     enabled: !!userId
   })
 }
+
+export const useGetLikedAlbums = ({ userId }: { userId?: string }) => {
+  return useQuery({
+    queryKey: ["like-albums", userId],
+    queryFn: () => getLikedAlbums(userId!),
+    enabled: !!userId
+  })
+}
+
