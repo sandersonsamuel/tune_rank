@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button"
 import { useGetLikedAlbums, useGetLikedTracks } from "@/http/features/likes/hooks"
 import { useReleasesByUserId } from "@/http/features/rating/hooks"
 import { userState } from "@/valtio"
-import { DiscAlbum, Heart, LogOut, Music, StarIcon } from "lucide-react"
+import { DiscAlbum, Heart, Music, StarIcon } from "lucide-react"
+import { motion } from "motion/react"
 import Link from "next/link"
 import { useSnapshot } from "valtio"
 
@@ -18,7 +19,7 @@ export default function ProfilePage() {
     const { data: likedAlbums } = useGetLikedAlbums({ userId: user?.uid || "" })
     const { data: likedTracks } = useGetLikedTracks({ userId: user?.uid || "" })
 
-    const { data: releases, isLoading } = useReleasesByUserId(user?.uid || "")
+    const { data: releases } = useReleasesByUserId(user?.uid || "")
 
     return (
         <div className="flex flex-col items-center w-full px-3">
@@ -35,27 +36,11 @@ export default function ProfilePage() {
             </div>
 
             <div className="grid grid-cols-2 w-full gap-5 mt-10">
-                <div className="flex flex-col items-center justify-center bg-card w-full aspect-square rounded-xl gap-1">
-                    <DiscAlbum  className="size-12 p-2 bg-background rounded-full border border-slate-800 text-primary"/>
-                    <p className="text-3xl font-bold">{isLoading ? <span className="w-[18px] h-[36px] animate-pulse bg-slate-800 rounded-full"/> : releases?.albums.length}</p>
-                    <p className="text-xs text-neutral-400">Albuns avaliados</p>
-                </div>
-                <div className="flex flex-col items-center justify-center bg-card w-full aspect-square rounded-xl gap-1">
-                    <Music  className="size-12 p-2 bg-background rounded-full border border-slate-800 text-primary"/>
-                    <p className="text-3xl font-bold">{isLoading ? <span className="w-[18px] h-[36px] animate-pulse bg-slate-800 rounded-full"/> : releases?.tracks.length}</p>
-                    <p className="text-xs text-neutral-400">Musicas avaliadas</p>
-                </div>
+                <InfoSquareCard icon={<DiscAlbum  className="size-12 p-2 bg-background rounded-full border border-slate-800 text-primary"/>} value={releases?.albums.length} label="Albuns avaliados"/>
+                <InfoSquareCard icon={<Music  className="size-12 p-2 bg-background rounded-full border border-slate-800 text-primary"/>} value={releases?.tracks.length} label="Musicas avaliadas"/>
 
-                <div className="flex flex-col items-center justify-center bg-card w-full aspect-square rounded-xl gap-1">
-                    <Heart className="size-12 p-2 bg-background rounded-full border border-slate-800 text-destructive"/>
-                    <p className="text-3xl text-bold">{likedAlbums?.length}</p>
-                    <p className="text-xs text-neutral-400">Albuns curtidos</p>
-                </div>
-                <div className="flex flex-col items-center justify-center bg-card w-full aspect-square rounded-xl gap-1">
-                    <Heart className="size-12 p-2 bg-background rounded-full border border-slate-800 text-destructive"/>
-                    <p className="text-3xl text-bold">{likedTracks?.length}</p>
-                    <p className="text-xs text-neutral-400">Musicas curtidas</p>
-                </div>
+                <InfoSquareCard icon={<Heart className="size-12 p-2 bg-background rounded-full border border-slate-800 text-destructive"/>} value={likedAlbums?.length} label="Albuns curtidos"/>
+                <InfoSquareCard icon={<Heart className="size-12 p-2 bg-background rounded-full border border-slate-800 text-destructive"/>} value={likedTracks?.length} label="Musicas curtidas"/>
             </div>
 
             <h2 className="text-xl mt-5 w-full text-left text-neutral-300">Biblioteca</h2>
@@ -77,5 +62,21 @@ export default function ProfilePage() {
                 <LogoutButton/>
             </div>
         </div>
+    )
+}
+
+interface InfoSquareCardProps {
+    icon: React.ReactNode
+    value?: number
+    label: string
+}
+
+const InfoSquareCard = ({ icon, value = 0, label }: InfoSquareCardProps) => {
+    return (
+        <motion.div whileTap={{scale: 0.95}} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="flex flex-col items-center justify-center bg-card w-full aspect-square rounded-xl gap-1">
+            {icon}
+            <p className="text-3xl text-bold">{value}</p>
+            <p className="text-xs text-neutral-400">{label}</p>
+        </motion.div>
     )
 }
