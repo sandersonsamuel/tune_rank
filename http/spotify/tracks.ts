@@ -2,6 +2,11 @@ import { SpotifyTrackItem } from "@/types/spotify/track"
 import { getSpotifyToken } from "."
 
 export const getTrack = async (id: string | string[]): Promise<SpotifyTrackItem | {tracks: SpotifyTrackItem[]}> => {
+
+  if (Array.isArray(id) && id.length === 0) {
+    return {tracks: []}
+  }
+
   const token = await getSpotifyToken()
 
   const response = await fetch(

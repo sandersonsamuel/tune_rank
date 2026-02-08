@@ -2,6 +2,11 @@ import { SpotifyAlbum } from "@/types/spotify/album"
 import { getSpotifyToken } from "."
 
 export const getAlbum = async (id: string | string[]): Promise<SpotifyAlbum | {albums: SpotifyAlbum[]}> => {
+
+  if (Array.isArray(id) && id.length === 0) {
+    return {albums: []}
+  }
+
   const token = await getSpotifyToken()
 
   const response = await fetch(

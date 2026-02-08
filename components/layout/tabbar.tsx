@@ -17,11 +17,7 @@ export const MobileTabBar = () => {
     }, {
       icon: <Search className="size-5" />,
       href: "/search"
-    },
-    {
-      icon: <Star className="size-5" />,
-      href: "/my/reviews"
-    }, {
+    },{
       icon: <User className="size-5" />,
       href: "/my/profile"
     },
